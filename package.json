@@ -7,7 +7,16 @@
     "dev": "vite dev",
     "build": "vite build && tsc --noEmit",
     "preview": "vite preview",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "dependencies": {
     "@tanstack/react-router": "^1.141.2",
@@ -19,6 +28,8 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.0",
     "@eslint/js": "^9.39.2",
     "@tailwindcss/postcss": "^4.1.15",
     "@tanstack/eslint-config": "^0.3.4",

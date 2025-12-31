@@ -1,0 +1,16 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Lint only staged files and auto-add fixes
+npx --no-install lint-staged || {
+  echo "\n✖ lint-staged failed — aborting commit"
+  exit 1
+}
+
+# Run a full typecheck (can be slow) and abort on error
+npm run typecheck || {
+  echo "\n✖ Typecheck failed — aborting commit"
+  exit 1
+}
+
+exit 0
